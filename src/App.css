@@ -1,0 +1,36 @@
+.geral {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.formulario {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  height: 250px;
+  width: 750px;
+}
+
+button {
+  font-size: 25px;
+  height: 40px;
+  width: 110px;
+}
+
+input, select {
+  font-size: 25px;
+  height: 40px;
+  margin-left: 5px;
+  text-align: center;
+  width: 340px;
+}
+
+select {
+  width: 500px;
+}
+
+.quadrado {
+  width: 85px;
+}

@@ -3,7 +3,7 @@ import React from 'react';
 class Form extends React.Component {
   render() {
     return (
-      <div>
+      <div className="formulario">
         <input type="text" data-testid="name-input" />
         <input type="textarea" data-testid="description-input" />
         <input type="number" data-testid="attr1-input" />
@@ -15,10 +15,10 @@ class Form extends React.Component {
           <option>raro</option>
           <option>muito raro</option>
         </select>
-        <input type="checkbox" data-testid="trunfo-input" />
-        <button data-testid="save-button">Salvar</button>
+        <input type="checkbox" className="quadrado" data-testid="trunfo-input" />
+        <button type="button" data-testid="save-button">Salvar</button>
       </div>
-    )
+    );
   }
 }
 export default Form;
