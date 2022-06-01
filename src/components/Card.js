@@ -1,6 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 
+// Feito com ajuda de Pesquisa no https://reactjs.org/docs/handling-events.html
 class Card extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
@@ -9,7 +10,6 @@ class Card extends React.Component {
 
     return (
       <div>
-        <h2 data-testid="trunfo-card">Super Trunfo</h2>
         <p data-testid="name-card">
           { cardName }
         </p>
@@ -30,6 +30,7 @@ class Card extends React.Component {
         <p data-testid="rare-card">
           { cardRare }
         </p>
+        {cardTrunfo ? <h2 data-testid="trunfo-card">Super Trunfo</h2> : ''}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-
+// Feito com ajuda de Pesquisa no https://reactjs.org/docs/handling-events.html
 class Form extends React.Component {
 /*   state = {
     cardName: '',
