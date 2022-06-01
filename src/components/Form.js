@@ -15,7 +15,15 @@ class Form extends React.Component {
     isSaveButtonDisabledEstado: true,
     savedCards: [],
   }; */
-
+  /* constructor(props) {
+    super(props)
+    this.state = {isToggleOn: true}
+    this.handleClick = this.handleClick.bind(this)
+    function handleClick () {
+      this.setState(valorAtual => ({isToggleOn: !valorAtual.isToggleOn}));
+    }
+  }
+ */
   render() {
     const { cardName,
       cardDescription,
@@ -34,7 +42,7 @@ class Form extends React.Component {
       <div className="formulario">
         <input
           type="text"
-          onChange={ onInputChange }
+          onChange={ onInputChange } // o que for escrito, vira valor do onInput
           value={ cardName }
           data-testid="name-input"
         />
