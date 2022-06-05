@@ -2,28 +2,10 @@ import React from 'react';
 import PropType from 'prop-types';
 // Feito com ajuda de Pesquisa no https://reactjs.org/docs/handling-events.html
 class Form extends React.Component {
-/*   state = {
-    cardName: '',
-    cardDescription: '',
-    cardAttr1: 0,
-    cardAttr2: 0,
-    cardAttr3: 0,
-    cardImage: '',
-    cardRare: 'normal',
-    cardTrunfo: false,
-    hasTrunfo: false,
-    isSaveButtonDisabledEstado: true,
-    savedCards: [],
-  }; */
-  /* constructor(props) {
-    super(props)
-    this.state = {isToggleOn: true}
-    this.handleClick = this.handleClick.bind(this)
-    function handleClick () {
-      this.setState(valorAtual => ({isToggleOn: !valorAtual.isToggleOn}));
-    }
+  handleClique() {
+    console.log('clicou');
   }
- */
+
   render() {
     const { cardName,
       cardDescription,
@@ -38,50 +20,50 @@ class Form extends React.Component {
       isSaveButtonDisabled,
     } = this.props;
 
+    // const checarTrunfo = () => {cardTrunfo}.value = true;
     return (
       <div className="formulario">
         <input
           type="text"
-          onChange={ onInputChange } // o que for escrito, vira valor do onInput
+          name="nomeCarta"
           value={ cardName }
+          onChange={ onInputChange } // o que for escrito, vira valor do onInput
           data-testid="name-input"
         />
-        { onInputChange }
         <input
           type="textarea"
+          name="descricaoCarta"
           value={ cardDescription }
           onChange={ onInputChange }
           data-testid="description-input"
         />
-        { onInputChange }
         <input
           type="number"
+          name="attr1"
           onChange={ onInputChange }
           value={ cardAttr1 }
           data-testid="attr1-input"
         />
-        {onInputChange}
         <input
           type="number"
+          name="attr2"
           onChange={ onInputChange }
           value={ cardAttr2 }
           data-testid="attr2-input"
         />
-        {onInputChange}
         <input
           type="number"
+          name="attr3"
           onChange={ onInputChange }
           value={ cardAttr3 }
           data-testid="attr3-input"
         />
-        {onInputChange}
         <input
           type="text"
           onChange={ onInputChange }
           value={ cardImage }
           data-testid="image-input"
         />
-        {onInputChange}
         <select
           value={ cardRare }
           data-testid="rare-input"
@@ -94,7 +76,7 @@ class Form extends React.Component {
         <input
           type="checkbox"
           className="SuperTrunfo"
-          checked={ cardTrunfo }
+          defaultChecked={ cardTrunfo }
           onChange={ onInputChange }
           data-testid="trunfo-input"
         />
@@ -116,8 +98,8 @@ Form.propTypes = {
   cardAttr1: PropType.number.isRequired,
   cardAttr2: PropType.number.isRequired,
   cardAttr3: PropType.number.isRequired,
-  cardImage: PropType.number.isRequired,
-  cardRare: PropType.bool.isRequired,
+  cardImage: PropType.string.isRequired,
+  cardRare: PropType.string.isRequired,
   cardTrunfo: PropType.bool.isRequired,
   // hasTrunfo: PropType.bool.isRequired,
   isSaveButtonDisabled: PropType.bool.isRequired,

@@ -1,22 +1,23 @@
 import React from 'react';
 import PropType from 'prop-types';
-
 // Feito com ajuda de Pesquisa no https://reactjs.org/docs/handling-events.html
 class Card extends React.Component {
   render() {
-    const { cardName, cardDescription, cardAttr1,
-      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo } = this.props;
-    console.log({ cardTrunfo });
+    const { cardName, cardDescription,
+      cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo } = this.props;
 
     return (
       <div>
-        <p data-testid="name-card">
-          { cardName }
-        </p>
+        <p data-testid="name-card">{ cardName }</p>
         <p data-testid="description-card">
           { cardDescription }
         </p>
-        <img src={ cardImage } alt={ cardName } data-testid="image-card" />
+        <img
+          src={ cardImage }
+          alt={ cardName }
+          data-testid="image-card"
+        />
         <hr />
         <p data-testid="attr1-card">
           { cardAttr1 }
@@ -30,6 +31,7 @@ class Card extends React.Component {
         <p data-testid="rare-card">
           { cardRare }
         </p>
+        <p data-testid="trunfo-card" />
         {cardTrunfo ? <h2 data-testid="trunfo-card">Super Trunfo</h2> : ''}
       </div>
     );
