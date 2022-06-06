@@ -15,6 +15,7 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
       onInputChange,
       onSaveButtonClick,
       isSaveButtonDisabled,
@@ -87,8 +88,8 @@ class Form extends React.Component {
         <input
           name="trunfo-input"
           type="checkbox"
-          className="SuperTrunfo"
-          defaultChecked={ cardTrunfo }
+          className={ cardTrunfo } // mudar dps
+          defaultChecked={ hasTrunfo }
           onChange={ onInputChange }
           data-testid="trunfo-input"
         />
