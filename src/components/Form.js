@@ -88,9 +88,8 @@ class Form extends React.Component {
         <input
           name="trunfo-input"
           type="checkbox"
-          className={ cardTrunfo } // mudar dps
           defaultChecked={ hasTrunfo }
-          onChange={ onInputChange }
+          onChange={ cardTrunfo }
           data-testid="trunfo-input"
         />
         <button
