@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Form from './components/Form';
 import Card from './components/Card';
+import SavedCards from './components/SavedCards';
 
 class App extends React.Component {
     state = {
@@ -14,14 +15,11 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       raridade: '',
       cardTrunfo: false,
-      // hasTrunfo: true,
+      cartas: '',
     };
 
   handlerInput = (event) => {
     const { target: { value, name } } = event;
-    /* if (name === 'attr3' || name === 'attr2' || name === 'attr1') {
-      this.setState({ [name]: Number(value) }
-    } else { */
     this.setState({ [name]: value }, this.onSaveButtonClick);
     const { cardTrunfo } = this.state;
     if (cardTrunfo) {
@@ -56,10 +54,29 @@ class App extends React.Component {
     }
   }
 
+  handleSaveButton = () => {
+    const { nomeCarta, descricaoCarta, imagem,
+      attr1, attr2, attr3, raridade } = this.state;
+    this.setState({
+      cartas:
+        [nomeCarta, descricaoCarta, imagem,
+          raridade, attr1, attr2, attr3],
+    }, () => {
+      this.setState({ nomeCarta: '',
+        descricaoCarta: '',
+        imagem: '',
+        attr1: 0,
+        attr2: 0,
+        attr3: 0,
+        raridade: 'normal',
+      });
+    });
+  }
+
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
-      cardTrunfo, onSaveButtonClick } = this.state;
+      cardTrunfo, cartas } = this.state;
     return (
       <div className="geral">
         <h1>Tryunfo</h1>
@@ -75,7 +92,8 @@ class App extends React.Component {
           hasTrunfo="cardTrunfo"
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handlerInput }
-          onSaveButtonClick={ onSaveButtonClick }
+          onSaveButtonClick={ this.handleSaveButton }
+          cartas={ cartas }
         />
         <Card
           cardName={ nomeCarta }
@@ -87,6 +105,7 @@ class App extends React.Component {
           cardRare={ raridade }
           cardTrunfo={ cardTrunfo }
         />
+        <SavedCards />
       </div>
     );
   }
