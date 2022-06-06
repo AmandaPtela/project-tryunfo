@@ -86,10 +86,11 @@ class Form extends React.Component {
           <option>muito raro</option>
         </select>
         <input
+          className={ hasTrunfo }
           name="trunfo-input"
           type="checkbox"
-          defaultChecked={ hasTrunfo }
-          onChange={ cardTrunfo }
+          checked={ cardTrunfo }
+          onChange={ onInputChange }
           data-testid="trunfo-input"
         />
         <button

@@ -12,7 +12,8 @@ class App extends React.Component {
       attr3: 0,
       saveButton: true,
       raridade: 'normal',
-      cardTrunfo: false,
+      cardTrunfo: true,
+      // hasTrunfo: true,
     };
 
   handlerInput = (event) => {
@@ -22,13 +23,14 @@ class App extends React.Component {
     } else {
       this.setState({ [name]: value });
     }
+    this.setState({ cardTrunfo: true });
   }
 
-  handleCliqueButton = () => {
+  /*   handleCliqueButton = () => {
     // const { cardTrunfo } = this.state;
     console.log('clicou botão salvar');
     this.setState({ cardTrunfo: true });
-  };
+  }; */
 
   handleSaveButton = () => {
     const valorMaxCard = 90;
@@ -70,7 +72,7 @@ class App extends React.Component {
           cardAttr3={ attr3 }
           cardImage={ nomeCarta }
           cardRare={ raridade }
-          cardTrunfo={ this.handleCliqueButton }
+          cardTrunfo={ cardTrunfo }
           hasTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ saveButton }
           onInputChange={ this.handlerInput }
@@ -84,7 +86,7 @@ class App extends React.Component {
           cardAttr3={ attr3 }
           cardImage={ nomeCarta }
           cardRare={ raridade }
-          cardTrunfo={ this.handleCliqueButton }
+          cardTrunfo={ cardTrunfo }
         />
       </div>
     );
