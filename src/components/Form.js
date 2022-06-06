@@ -20,9 +20,6 @@ class Form extends React.Component {
       onSaveButtonClick,
       isSaveButtonDisabled,
     } = this.props;
-    // const cardAttr1Number = Number(cardAttr1);
-    // const cardAttr2Number = Number(cardAttr2);
-    // const cardAttr3Number = Number(cardAttr3);
 
     // const checarTrunfo = () => {cardTrunfo}.value = true;
     return (

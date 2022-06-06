@@ -11,7 +11,7 @@ class App extends React.Component {
       attr1: 0,
       attr2: 0,
       attr3: 0,
-      saveButton: false,
+      isSaveButtonDisabled: true,
       raridade: '',
       cardTrunfo: false,
       // hasTrunfo: true,
@@ -19,43 +19,47 @@ class App extends React.Component {
 
   handlerInput = (event) => {
     const { target: { value, name } } = event;
-    if (name === 'attr3' || name === 'attr2' || name === 'attr1') {
-      this.setState({ [name]: Number(value) });
-    } else {
-      this.setState({ [name]: value });
-    }
+    /* if (name === 'attr3' || name === 'attr2' || name === 'attr1') {
+      this.setState({ [name]: Number(value) }
+    } else { */
+    this.setState({ [name]: value }, this.onSaveButtonClick);
     const { cardTrunfo } = this.state;
     if (cardTrunfo) {
       this.setState({ cardTrunfo: false });
-    } 
-    else {  
+    } else {
     // deixa mudar o estado do checkbox
       this.setState({ cardTrunfo: true });
     }
   }
 
-  handleSaveButton = () => {
+  onSaveButtonClick = () => {
     const { nomeCarta, descricaoCarta, imagem,
-      attr1, attr2, attr3, raridade } = this.state;
-    const valorMaxCard = 90;
-    const valorMinCard = 0;
-    const maxSoma = 210;
+      attr1, attr2, attr3 } = this.state;
+    const maxCard = 90;
+    const minCard = 0;
+    const somaTotal = 210;
+    const attr1N = Number(attr1);
+    const attr2N = Number(attr2);
+    const attr3N = Number(attr3);
+    const somaAttr = attr1N + attr2N + attr3N;
 
-    if (nomeCarta === ''
-    || descricaoCarta === ''
-    || imagem === ''
-    || raridade === ''
-    || attr1 > valorMaxCard || attr1 < valorMinCard
-    || attr2 > valorMaxCard || attr2 < valorMinCard
-    || attr3 > valorMaxCard || attr3 < valorMinCard
-    || (attr1 + attr2 + attr3) > maxSoma) {
-      this.setState({ saveButton: true });
+    if (
+      nomeCarta === '' || imagem === '' || descricaoCarta === ''
+      || attr1 > maxCard || attr1 < minCard
+      || attr2 > maxCard || attr2 < minCard
+      || attr3 > maxCard || attr3 < minCard
+      || somaAttr > somaTotal
+    ) {
+      this.setState({ isSaveButtonDisabled: true });
+    } else {
+      this.setState({ isSaveButtonDisabled: false });
     }
   }
 
   render() {
     const { nomeCarta, descricaoCarta, imagem,
-      attr1, attr2, attr3, raridade, saveButton, cardTrunfo } = this.state;
+      attr1, attr2, attr3, raridade, isSaveButtonDisabled,
+      cardTrunfo, onSaveButtonClick } = this.state;
     return (
       <div className="geral">
         <h1>Tryunfo</h1>
@@ -69,9 +73,9 @@ class App extends React.Component {
           cardRare={ raridade }
           cardTrunfo={ cardTrunfo }
           hasTrunfo="cardTrunfo"
-          isSaveButtonDisabled={ saveButton }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handlerInput }
-          onSaveButtonClick={ this.handleSaveButton }
+          onSaveButtonClick={ onSaveButtonClick }
         />
         <Card
           cardName={ nomeCarta }

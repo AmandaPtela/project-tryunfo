@@ -6,6 +6,9 @@ class Card extends React.Component {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo } = this.props;
+    const cardAttr1S = String(cardAttr1);
+    const cardAttr2S = String(cardAttr2);
+    const cardAttr3S = String(cardAttr3);
     return (
       <div>
         <p data-testid="name-card">{ cardName }</p>
@@ -19,13 +22,13 @@ class Card extends React.Component {
         />
         <hr />
         <p data-testid="attr1-card">
-          { cardAttr1 }
+          { cardAttr1S }
         </p>
         <p data-testid="attr2-card">
-          { cardAttr2 }
+          { cardAttr2S }
         </p>
         <p data-testid="attr3-card">
-          { cardAttr3 }
+          { cardAttr3S }
         </p>
         <p data-testid="rare-card">
           { cardRare }
