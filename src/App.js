@@ -7,12 +7,13 @@ class App extends React.Component {
     state = {
       nomeCarta: '',
       descricaoCarta: '',
+      imagem: '',
       attr1: 0,
       attr2: 0,
       attr3: 0,
-      saveButton: true,
-      raridade: 'normal',
-      cardTrunfo: true,
+      saveButton: false,
+      raridade: '',
+      cardTrunfo: false,
       // hasTrunfo: true,
     };
 
@@ -23,43 +24,37 @@ class App extends React.Component {
     } else {
       this.setState({ [name]: value });
     }
-    this.setState({ cardTrunfo: true });
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo) {
+      this.setState({ cardTrunfo: false });
+    } 
+    else {  
+    // deixa mudar o estado do checkbox
+      this.setState({ cardTrunfo: true });
+    }
   }
 
-  /*   handleCliqueButton = () => {
-    // const { cardTrunfo } = this.state;
-    console.log('clicou botão salvar');
-    this.setState({ cardTrunfo: true });
-  }; */
-
   handleSaveButton = () => {
+    const { nomeCarta, descricaoCarta, imagem,
+      attr1, attr2, attr3, raridade } = this.state;
     const valorMaxCard = 90;
+    const valorMinCard = 0;
     const maxSoma = 210;
-    const atributo1 = Number(attr1);
-    const atributo2 = Number(attr2);
-    const atributo3 = Number(attr3);
-    const somaAtr = atributo1 + atributo2 + atributo3;
 
     if (nomeCarta === ''
     || descricaoCarta === ''
-    || cardImage === '') {
+    || imagem === ''
+    || raridade === ''
+    || attr1 > valorMaxCard || attr1 < valorMinCard
+    || attr2 > valorMaxCard || attr2 < valorMinCard
+    || attr3 > valorMaxCard || attr3 < valorMinCard
+    || (attr1 + attr2 + attr3) > maxSoma) {
       this.setState({ saveButton: true });
-    }
-    if (atributo1 > valorMaxCard // || atributo1 > 0
-    || atributo2 > valorMaxCard // || atributo2 > 0
-    || atributo3 > valorMaxCard) {
-      this.setState({ saveButton: true });
-    }
-    // || atributo3 > 0
-    if (somaAtr > maxSoma) {
-      this.setState({ saveButton: true });
-    } else {
-      this.setState({ saveButton: false });
     }
   }
 
   render() {
-    const { nomeCarta, descricaoCarta,
+    const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, saveButton, cardTrunfo } = this.state;
     return (
       <div className="geral">
@@ -70,13 +65,13 @@ class App extends React.Component {
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
-          cardImage={ nomeCarta }
+          cardImage={ imagem }
           cardRare={ raridade }
           cardTrunfo={ cardTrunfo }
-          hasTrunfo={ cardTrunfo }
+          hasTrunfo="cardTrunfo"
           isSaveButtonDisabled={ saveButton }
           onInputChange={ this.handlerInput }
-          onSaveButtonClick={ this.handleCliqueButton }
+          onSaveButtonClick={ this.handleSaveButton }
         />
         <Card
           cardName={ nomeCarta }

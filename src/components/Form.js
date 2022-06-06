@@ -68,6 +68,7 @@ class Form extends React.Component {
           data-testid="attr3-input"
         />
         <input
+          name="imagem"
           className="input-form"
           type="text"
           onChange={ onInputChange }
