@@ -15,7 +15,8 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       raridade: '',
       cardTrunfo: false,
-      cartas: '',
+      carta: '',
+      baralho: '',
     };
 
   handlerInput = (event) => {
@@ -56,11 +57,11 @@ class App extends React.Component {
 
   handleSaveButton = () => {
     const { nomeCarta, descricaoCarta, imagem,
-      attr1, attr2, attr3, raridade } = this.state;
+      attr1, attr2, attr3, raridade, carta, cardTrunfo } = this.state;
     this.setState({
-      cartas:
+      carta:
         [nomeCarta, descricaoCarta, imagem,
-          raridade, attr1, attr2, attr3],
+          raridade, attr1, attr2, attr3, cardTrunfo],
     }, () => {
       this.setState({ nomeCarta: '',
         descricaoCarta: '',
@@ -69,6 +70,8 @@ class App extends React.Component {
         attr2: 0,
         attr3: 0,
         raridade: 'normal',
+        cardTrunfo: false,
+        baralho: carta,
       });
     });
   }
@@ -76,7 +79,7 @@ class App extends React.Component {
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
-      cardTrunfo, cartas } = this.state;
+      cardTrunfo, carta, baralho } = this.state;
     return (
       <div className="geral">
         <h1>Tryunfo</h1>
@@ -89,11 +92,12 @@ class App extends React.Component {
           cardImage={ imagem }
           cardRare={ raridade }
           cardTrunfo={ cardTrunfo }
-          hasTrunfo="cardTrunfo"
+          hasTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handlerInput }
           onSaveButtonClick={ this.handleSaveButton }
-          cartas={ cartas }
+          barai={ baralho }
+          carta={ carta }
         />
         <Card
           cardName={ nomeCarta }
@@ -105,7 +109,10 @@ class App extends React.Component {
           cardRare={ raridade }
           cardTrunfo={ cardTrunfo }
         />
-        <SavedCards />
+        <SavedCards
+          carta={ carta }
+          barai={ baralho }
+        />
       </div>
     );
   }

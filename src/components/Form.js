@@ -19,6 +19,7 @@ class Form extends React.Component {
       onInputChange,
       onSaveButtonClick,
       isSaveButtonDisabled,
+      // carta,
     } = this.props;
 
     // const checarTrunfo = () => {cardTrunfo}.value = true;
