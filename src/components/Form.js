@@ -97,7 +97,7 @@ class Form extends React.Component {
           </div>
           <div className="secao-checkbox">
             <input
-              id="checkbox"
+              className="input-trunfo"
               name="cardTrunfo"
               type="checkbox"
               checked={ cardTrunfo }
