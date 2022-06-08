@@ -1,16 +1,37 @@
 .geral {
-  align-items: center;
+  align-items: baseline;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 40px;
   text-align: center;
 }
 
 .formulario {
+  background-color: rgba(114, 107, 107, 0.644);
   align-items: center;
   display: flex;
-  flex-flow: row wrap;
-  height: 250px;
-  width: 750px;
+  flex-direction: column;
+  font-size: 25px;
+  justify-content: space-around;
+  height: 500px;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.texto-raridade, .texto-trunfo {
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 20px;
+  padding-left: 7px;
+}
+
+.secao-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-center;
 }
 
 button {
@@ -22,7 +43,6 @@ button {
 input, select {
   font-size: 25px;
   height: 40px;
-  margin-left: 5px;
   text-align: center;
   width: 340px;
 }
@@ -31,6 +51,54 @@ select {
   width: 500px;
 }
 
-.quadrado {
-  width: 85px;
+#checkbox {
+  width: 30px;
+}
+
+.secao-carta {
+ background-color: rgba(255, 127, 170, 0.712);
+ border: 0.2cm solid rgba(163, 152, 86, 0.671);
+ border-radius: 1.2em;
+ font-family: sans-serif;
+ height: 100%;
+ line-height: 1px;
+ margin: 0;
+ max-width: 550px;
+ min-width: 450px;
+ padding: 10px;
+ text-align: center;
+}
+
+.textos-card {
+  align-items: center;
+  color: rgba(44, 40, 40, 0.822);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 35px;
+  max-width: 300px;
+  padding-left:5px;
+  text-align: left;
+}
+
+.textos-card-bottom {
+  align-items: center;
+  color: rgba(44, 40, 40, 0.822);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 35px;
+}
+
+.secao-attr {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+.imagem {
+  margin: 5px;
+}
+
+.secao-cartas-salvas {
+  display: flex;
+  flex-direction: column;
 }

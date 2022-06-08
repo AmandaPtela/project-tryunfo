@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+// import Busca from './components/Busca';
 import Form from './components/Form';
 import Card from './components/Card';
 import SavedCards from './components/SavedCards';
@@ -9,9 +10,9 @@ class App extends React.Component {
       nomeCarta: '',
       descricaoCarta: '',
       imagem: '',
-      attr1: 0,
-      attr2: 0,
-      attr3: 0,
+      attr1: '',
+      attr2: '',
+      attr3: '',
       isSaveButtonDisabled: true,
       raridade: '',
       cardTrunfo: false,
@@ -19,16 +20,14 @@ class App extends React.Component {
       baralho: '',
     };
 
-  handlerInput = (event) => {
-    const { target: { value, name } } = event;
-    this.setState({ [name]: value }, this.onSaveButtonClick);
-    const { cardTrunfo } = this.state;
-    if (cardTrunfo) {
-      this.setState({ cardTrunfo: false });
-    } else {
-    // deixa mudar o estado do checkbox
-      this.setState({ cardTrunfo: true });
-    }
+  handlerInput = ({ target }) => {
+    const { name } = target;
+    const value = (target.type === 'checkbox')
+      ? target.checked
+      : target.value;
+    this.setState({
+      [name]: value,
+    }, this.onSaveButtonClick);
   }
 
   onSaveButtonClick = () => {
@@ -57,7 +56,7 @@ class App extends React.Component {
 
   handleSaveButton = () => {
     const { nomeCarta, descricaoCarta, imagem,
-      attr1, attr2, attr3, raridade, carta, cardTrunfo } = this.state;
+      attr1, attr2, attr3, raridade, baralho, cardTrunfo } = this.state;
     this.setState({
       carta:
         [nomeCarta, descricaoCarta, imagem,
@@ -71,7 +70,19 @@ class App extends React.Component {
         attr3: 0,
         raridade: 'normal',
         cardTrunfo: false,
-        baralho: carta,
+        baralho: [
+          ...baralho,
+          [
+            nomeCarta,
+            descricaoCarta,
+            imagem,
+            raridade,
+            attr1,
+            attr2,
+            attr3,
+            cardTrunfo,
+          ],
+        ],
       });
     });
   }
@@ -82,7 +93,7 @@ class App extends React.Component {
       cardTrunfo, carta, baralho } = this.state;
     return (
       <div className="geral">
-        <h1>Tryunfo</h1>
+        {/* <Busca /> */}
         <Form
           cardName={ nomeCarta }
           cardDescription={ descricaoCarta }
@@ -96,7 +107,7 @@ class App extends React.Component {
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handlerInput }
           onSaveButtonClick={ this.handleSaveButton }
-          barai={ baralho }
+          baralho={ baralho }
           carta={ carta }
         />
         <Card
@@ -105,13 +116,13 @@ class App extends React.Component {
           cardAttr1={ attr1 }
           cardAttr2={ attr2 }
           cardAttr3={ attr3 }
-          cardImage={ nomeCarta }
+          cardImage={ imagem }
           cardRare={ raridade }
           cardTrunfo={ cardTrunfo }
         />
         <SavedCards
           carta={ carta }
-          barai={ baralho }
+          baralho={ baralho }
         />
       </div>
     );
