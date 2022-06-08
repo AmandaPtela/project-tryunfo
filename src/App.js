@@ -94,36 +94,41 @@ class App extends React.Component {
     return (
       <div className="geral">
         {/* <Busca /> */}
-        <Form
-          cardName={ nomeCarta }
-          cardDescription={ descricaoCarta }
-          cardAttr1={ attr1 }
-          cardAttr2={ attr2 }
-          cardAttr3={ attr3 }
-          cardImage={ imagem }
-          cardRare={ raridade }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.handlerInput }
-          onSaveButtonClick={ this.handleSaveButton }
-          baralho={ baralho }
-          carta={ carta }
-        />
-        <Card
-          cardName={ nomeCarta }
-          cardDescription={ descricaoCarta }
-          cardAttr1={ attr1 }
-          cardAttr2={ attr2 }
-          cardAttr3={ attr3 }
-          cardImage={ imagem }
-          cardRare={ raridade }
-          cardTrunfo={ cardTrunfo }
-        />
-        <SavedCards
-          carta={ carta }
-          baralho={ baralho }
-        />
+        <div className="form-preview">
+          <Form
+            cardName={ nomeCarta }
+            cardDescription={ descricaoCarta }
+            cardAttr1={ attr1 }
+            cardAttr2={ attr2 }
+            cardAttr3={ attr3 }
+            cardImage={ imagem }
+            cardRare={ raridade }
+            cardTrunfo={ cardTrunfo }
+            hasTrunfo={ cardTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onInputChange={ this.handlerInput }
+            onSaveButtonClick={ this.handleSaveButton }
+            baralho={ baralho }
+            carta={ carta }
+          />
+          <Card
+            cardName={ nomeCarta }
+            cardDescription={ descricaoCarta }
+            cardAttr1={ attr1 }
+            cardAttr2={ attr2 }
+            cardAttr3={ attr3 }
+            cardImage={ imagem }
+            cardRare={ raridade }
+            cardTrunfo={ cardTrunfo }
+          />
+        </div>
+        <div className="baralho">
+          <SavedCards
+            carta={ carta }
+            baralho={ baralho }
+          />
+        </div>
+
       </div>
     );
   }

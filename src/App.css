@@ -1,4 +1,8 @@
 .geral {
+  display: flex;
+  flex-direction: column;
+}
+.form-preview {
   align-items: baseline;
   display: flex;
   flex-direction: row;
@@ -53,6 +57,20 @@ select {
 
 .input-trunfo {
   width: 30px;
+}
+
+.baralho {
+  background-color: rgba(255, 127, 170, 0.712);
+  border: 0.2cm solid rgba(163, 152, 86, 0.671);
+  border-radius: 1.2em;
+  font-family: sans-serif;
+  height: 100%;
+  line-height: 1px;
+  margin: 0;
+  max-width: 550px;
+  min-width: 400px;
+  padding: 10px;
+  text-align: center;
 }
 
 .secao-carta {
