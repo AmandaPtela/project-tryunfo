@@ -4,9 +4,7 @@ import '../App.css';
 
 class SavedCards extends React.Component {
   render() {
-    const { listaNomes,
-      carta,
-      baralho } = this.props;
+    const { baralho } = this.props;
     return (
       <div className="baralho-salvos">
         <div className="baralho">
