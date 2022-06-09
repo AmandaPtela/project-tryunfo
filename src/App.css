@@ -1,7 +1,9 @@
 .geral {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
+
 .form-preview {
   align-items: baseline;
   display: flex;
@@ -116,7 +118,14 @@ select {
   margin: 5px;
 }
 
-.secao-cartas-salvas {
+.SavedCards {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+}
+
+.baralho-salvos {
+  background-color: aquamarine;
+  display: flex;
+  width: 250px;
 }

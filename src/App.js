@@ -18,6 +18,7 @@ class App extends React.Component {
       cardTrunfo: false,
       carta: '',
       baralho: '',
+      listaNomes: '',
     };
 
   handlerInput = ({ target }) => {
@@ -55,7 +56,7 @@ class App extends React.Component {
   }
 
   handleSaveButton = () => {
-    const { nomeCarta, descricaoCarta, imagem,
+    const { nomeCarta, descricaoCarta, imagem, listaNomes,
       attr1, attr2, attr3, raridade, baralho, cardTrunfo } = this.state;
     this.setState({
       carta:
@@ -83,6 +84,9 @@ class App extends React.Component {
             cardTrunfo,
           ],
         ],
+        listaNomes: [...listaNomes,
+          [nomeCarta],
+        ],
       });
     });
   }
@@ -90,7 +94,7 @@ class App extends React.Component {
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
-      cardTrunfo, carta, baralho } = this.state;
+      cardTrunfo, carta, baralho, listaNomes } = this.state;
     return (
       <div className="geral">
         {/* <Busca /> */}
@@ -122,13 +126,25 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
           />
         </div>
-        <div className="baralho">
-          <SavedCards
+        <div className="botao-baralho">
+          { baralho ? <button type="button">Ir para baralho</button>
+            : '' }
+        </div>
+        {
+          baralho && <SavedCards
             carta={ carta }
             baralho={ baralho }
+            listaNomes={ listaNomes }
+            cardName={ nomeCarta }
+            cardDescription={ descricaoCarta }
+            cardAttr1={ attr1 }
+            cardAttr2={ attr2 }
+            cardAttr3={ attr3 }
+            cardImage={ imagem }
+            cardRare={ raridade }
+            cardTrunfo={ cardTrunfo }
           />
-        </div>
-
+        }
       </div>
     );
   }
