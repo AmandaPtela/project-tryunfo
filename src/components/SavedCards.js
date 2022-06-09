@@ -5,11 +5,11 @@ import '../App.css';
 class SavedCards extends React.Component {
   render() {
     const { baralho } = this.props;
-    const cartas = baralho;
+    // const cartas = baralho;
     return (
       <div className="baralho-salvos">
         <div className="baralho">
-          { carta }
+          { baralho }
         </div>
       </div>
     );
