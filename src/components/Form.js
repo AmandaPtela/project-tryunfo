@@ -18,11 +18,9 @@ class Form extends React.Component {
       onInputChange,
       onSaveButtonClick,
       isSaveButtonDisabled,
-      baralho,
+      superTrunfo,
     } = this.props;
 
-    const trunfo = baralho.filter((carta) => carta.cardTrunfo === true);
-    // const checarTrunfo = () => {cardTrunfo}.value = true;
     return (
       <div className="form-total">
         <h1>Tryunfo</h1>
@@ -88,14 +86,13 @@ class Form extends React.Component {
               value={ cardRare }
               data-testid="rare-input"
               onChange={ onInputChange }
-              // onClick={ (event) => this.setState({raridade: event.target.value})}
             >
               <option>normal</option>
               <option>raro</option>
               <option>muito raro</option>
             </select>
           </div>
-          {trunfo.length >= 1 ? (<span>Você já tem um Super Trunfo em seu baralho</span>
+          {superTrunfo >= 1 ? (<span>Você já tem um Super Trunfo em seu baralho</span>
           ) : (
             <div className="secao-checkbox">
               <input
@@ -134,7 +131,8 @@ Form.propTypes = {
   isSaveButtonDisabled: PropType.bool.isRequired,
   onInputChange: PropType.func.isRequired,
   onSaveButtonClick: PropType.func.isRequired,
-  baralho: PropType.arrayOf(PropType.object).isRequired,
+  // baralho: PropType.arrayOf(PropType.object).isRequired,
+  superTrunfo: PropType.number.isRequired,
 };
 
 export default Form;

@@ -5,7 +5,7 @@ class Card extends React.Component {
   render() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo } = this.props;
+      cardImage, cardRare, cardTrunfo, baralho } = this.props;
     const cardAttr1S = String(cardAttr1);
     const cardAttr2S = String(cardAttr2);
     const cardAttr3S = String(cardAttr3);
@@ -50,6 +50,12 @@ class Card extends React.Component {
         </p>
         <button // adicionar onClick e função apagar carta
           type="button"
+          onClick={ (event) => {
+            const alvo = event.target;
+            const cartass = baralho.map((carta) => carta);
+            cartass.indexOf(alvo);
+            cartass.split(alvo);
+          } }
         >
           Excluir
         </button>
@@ -67,5 +73,6 @@ Card.propTypes = {
   cardImage: PropType.string.isRequired,
   cardRare: PropType.string.isRequired,
   cardTrunfo: PropType.bool.isRequired,
+  baralho: PropType.arrayOf(PropType.object).isRequired,
 };
 export default Card;

@@ -108,6 +108,8 @@ class App extends React.Component {
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
       cardTrunfo, carta, baralho, filtro, filtrado } = this.state;
     const aray = carta.includes(filtro); // booleano
+    const trunfo = baralho.filter((cartaa) => cartaa.cardTrunfo === true);
+    const trunfoCheck = trunfo.length;
     return (
       <div className="geral">
         <div className="pesquisa">
@@ -135,6 +137,7 @@ class App extends React.Component {
             onInputChange={ this.handlerInput }
             onSaveButtonClick={ this.handleSaveButton }
             baralho={ baralho }
+            superTrunfo={ trunfoCheck }
             carta={ carta }
           />
           <Card
