@@ -1,7 +1,10 @@
 .geral {
+  background-color: rgb(118, 189, 173);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 30px;
+  text-align: center;
 }
 
 .form-preview {
@@ -118,14 +121,26 @@ select {
   margin: 5px;
 }
 
-.SavedCards {
+.secao-baralho {
+  border: 0.2cm solid rgb(221, 20, 81);
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-flow: row-reverse;
+  width: 100%;
 }
 
-.baralho-salvos {
-  background-color: aquamarine;
+.area-cartas {
+  background-color: rgb(28, 71, 209);
   display: flex;
-  width: 250px;
+  flex-flow: row wrap;
+  height: 100%;
+  justify-content: space-around;
+  padding: 30px;
+  width: 100%;
+}
+
+.lista-baralho {
+  background-color: rgb(29, 202, 29);
+  display: flex;
+  flex-direction: column;
+  width: 200px;
 }

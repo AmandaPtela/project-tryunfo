@@ -15,13 +15,13 @@ class Form extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
       onInputChange,
       onSaveButtonClick,
       isSaveButtonDisabled,
-      // carta,
+      baralho,
     } = this.props;
 
+    const trunfo = baralho.filter((carta) => carta.cardTrunfo === true);
     // const checarTrunfo = () => {cardTrunfo}.value = true;
     return (
       <div className="form-total">
@@ -95,17 +95,19 @@ class Form extends React.Component {
               <option>muito raro</option>
             </select>
           </div>
-          <div className="secao-checkbox">
-            <input
-              className="input-trunfo"
-              name="cardTrunfo"
-              type="checkbox"
-              checked={ cardTrunfo }
-              onChange={ onInputChange }
-              data-testid="trunfo-input"
-            />
-            <span className="texto-trunfo">Super Trunfo</span>
-          </div>
+          {trunfo.length >= 1 ? (<span>Você já tem um Super Trunfo em seu baralho</span>
+          ) : (
+            <div className="secao-checkbox">
+              <input
+                className="input-trunfo"
+                name="cardTrunfo"
+                type="checkbox"
+                checked={ cardTrunfo }
+                onChange={ onInputChange }
+                data-testid="trunfo-input"
+              />
+              <span className="texto-trunfo">Super Trunfo</span>
+            </div>) }
           <button
             name="save-button"
             type="button"
@@ -129,11 +131,10 @@ Form.propTypes = {
   cardImage: PropType.string.isRequired,
   cardRare: PropType.string.isRequired,
   cardTrunfo: PropType.bool.isRequired,
-  // hasTrunfo: PropType.bool.isRequired,
   isSaveButtonDisabled: PropType.bool.isRequired,
   onInputChange: PropType.func.isRequired,
   onSaveButtonClick: PropType.func.isRequired,
-  // onchange: PropType.func.isRequired,
+  baralho: PropType.arrayOf(PropType.object).isRequired,
 };
 
 export default Form;

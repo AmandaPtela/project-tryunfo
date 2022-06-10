@@ -48,6 +48,11 @@ class Card extends React.Component {
           Raridade:
           { cardRare }
         </p>
+        <button // adicionar onClick e função apagar carta
+          type="button"
+        >
+          Excluir
+        </button>
       </div>
     );
   }
