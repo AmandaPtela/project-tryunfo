@@ -7,14 +7,16 @@ class Filtrados extends React.Component {
     const filtrado = filtrados;
     return (
       <div>
-        {
-          filtrado.map((i) => (
-            <li key={ i }>
-              {
-                Object.values(i)
-              }
-            </li>))
-        }
+        <div>
+          {
+            filtrado.map((i) => (
+              <li key={ i.nomeCarta }>
+                {
+                  Object.values(i)
+                }
+              </li>))
+          }
+        </div>
       </div>
     );
   }
@@ -24,3 +26,11 @@ Filtrados.propTypes = {
 };
 
 export default Filtrados;
+
+/*
+apagar = (event) => {
+  const { baralho } = this.state;
+  this.setState({
+    baralho: baralho.splice(baralho.indexOf(event.target, 1)),
+  });
+} */

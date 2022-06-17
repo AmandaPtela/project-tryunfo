@@ -3,6 +3,7 @@ import './App.css';
 import Form from './components/Form';
 import Card from './components/Card';
 import Filtrados from './components/Filtrados';
+import SavedCards from './components/SavedCards';
 
 class App extends React.Component {
     state = {
@@ -26,12 +27,12 @@ class App extends React.Component {
     this.setState({ filtro: event.target.value });
   };
 
-  buscar = () => {
-    const { baralho } = this.state;
-    const arreyFiltradosNome = baralho.map((item) => item.nomeCarta);
-    // arreyFiltradosNome.includes(filtro) ? filtrado : ''
-    this.setState({ filtrado: arreyFiltradosNome });
-  }
+  /* buscarRaridade = () => {
+    const { baralho, filtro, filtrado } = this.state;
+    const filtroRaridade = baralho.filter((item) => item.raridade === 'raro');
+    filtroRaridade ? this.setState({filtrado: filtroRaridade}) : '';
+  return filtrado;
+    } */
 
   handlerInput = ({ target }) => {
     const { name } = target;
@@ -64,6 +65,15 @@ class App extends React.Component {
       this.setState({ isSaveButtonDisabled: true });
     } else {
       this.setState({ isSaveButtonDisabled: false });
+    }
+  }
+
+  apagar = (element) => {
+    const { baralho, cardTrunfo } = this.state;
+    baralho.splice(baralho.indexOf(element, 1));
+    this.setState({ baralho });
+    if (cardTrunfo) {
+      this.setState({ cardTrunfo: false });
     }
   }
 
@@ -107,21 +117,36 @@ class App extends React.Component {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
       cardTrunfo, carta, baralho, filtro, filtrado } = this.state;
+
     const aray = carta.includes(filtro); // booleano
     const trunfo = baralho.filter((cartaa) => cartaa.cardTrunfo === true);
     const trunfoCheck = trunfo.length;
+
     return (
       <div className="geral">
         <div className="pesquisa">
-          <input
-            type="text"
-            data-testid="name-filter"
-            name="filtro"
-            onChange={ this.filtrar }
-          />
-          <button type="button" onClick={ this.buscar }>Pesquisar</button>
-          { aray && <Filtrados filtrados={ filtrado } /> }
+          <select
+            onChange={ (event) => {
+              this.setState({ filtro: event.target.value });
+            } }
+            data-testid="rare-filter"
+          >
+            <option>todas</option>
+            <option>normal</option>
+            <option>raro</option>
+            <option>muito raro</option>
+          </select>
+          <button type="button" onClick={ this.buscarRaridade }>Pesquisar</button>
         </div>
+        {
+          (aray)
+            ? (
+              <Filtrados
+                filtrados={ filtrado }
+              />
+            )
+            : ''
+        }
         <div className="form-preview">
           <Form
             cardName={ nomeCarta }
@@ -159,7 +184,7 @@ class App extends React.Component {
         <div className="secao-baralho">
           <div className="area-cartas">
             {
-              baralho.map((card) => (<Card
+              baralho.map((card) => (<SavedCards
                 key={ card.imagem }
                 cardName={ card.nomeCarta }
                 cardDescription={ card.descricaoCarta }
@@ -169,6 +194,7 @@ class App extends React.Component {
                 cardImage={ card.imagem }
                 cardRare={ card.raridade }
                 cardTrunfo={ card.cardTrunfo }
+                excluir={ this.apagar }
               />))
             }
           </div>
