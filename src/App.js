@@ -2,14 +2,11 @@ import React from 'react';
 import './App.css';
 import Form from './components/Form';
 import Card from './components/Card';
-import Filtrados from './components/Filtrados';
-import SavedCards from './components/SavedCards';
 
 class App extends React.Component {
   constructor() {
     super();
     this.apagar = this.apagar.bind(this);
-
     this.state = {
       nomeCarta: '',
       descricaoCarta: '',
@@ -23,7 +20,7 @@ class App extends React.Component {
       carta: '',
       baralho: [],
       filtro: '',
-      filtrado: [],
+      copiaBaralho: [],
     };
   }
 
@@ -33,22 +30,26 @@ class App extends React.Component {
 
   buscarRaridade = () => {
     const { baralho, filtro } = this.state;
-    const copiaBaralho = [...baralho];
-    if (filtro === 'todas') {
-      return copiaBaralho;
-    }
-    if (filtro === 'raro' || filtro === 'muito raro' || filtro === 'normal') {
-      const filtroRaridade = baralho.filter((item) => item.raridade === filtro);
-      this.setState({ filtrado: filtroRaridade });
+    if (filtro === 'raro') {
+      const filtroRaro = baralho.filter((item) => item.raridade === filtro);
+      this.setState({ copiaBaralho: filtroRaro });
     }
 
-    if (filtro) {
-      return (baralho.filter((item) => item.cardName.startsWith(filtro)));
+    if (filtro === 'muito raro') {
+      const filtroMtRaro = baralho.filter((item) => item.raridade === filtro);
+      this.setState({ copiaBaralho: filtroMtRaro });
     }
-  /*     if (PesquisaTrunfo) {
-      const filtroTrunfo = baralho.find((itm) => itm.cardTrunfo === true);
-      this.setState({ filtrado: filtroTrunfo });
-    } */
+
+    if (filtro === 'normal') {
+      const filtroNormal = baralho.filter((item) => item.raridade === filtro);
+      this.setState({ copiaBaralho: filtroNormal });
+    }
+
+    if (filtro === 'todas') {
+
+      this.setState({ copiaBaralho: baralho });
+    }
+
   }
 
   handlerInput = ({ target }) => {
@@ -113,15 +114,26 @@ class App extends React.Component {
             attr3,
             cardTrunfo,
           },
+        ],
+        copiaBaralho: [...baralho, {
+          nomeCarta,
+          descricaoCarta,
+          imagem,
+          raridade,
+          attr1,
+          attr2,
+          attr3,
+          cardTrunfo,
+        },
         ] });
     });
   }
+  // resolvido com ajuda dos colegas Carla (turma 20A) e Jessy Damasceno(Turma 21A)
 
   apagar(event) {
     const { baralho } = this.state;
     const filtroCard = baralho.filter((item) => item.nomeCarta !== event.target.name);
     this.setState({ baralho: filtroCard });
-
     const trunfo = filtroCard.some((item) => item.cardTrunfo === true);
     this.setState({ cardTrunfo: trunfo });
   }
@@ -129,7 +141,7 @@ class App extends React.Component {
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
-      cardTrunfo, carta, baralho, filtrado } = this.state;
+      cardTrunfo, carta, baralho } = this.state;
 
     const trunfo = baralho.filter((cartaa) => cartaa.cardTrunfo === true);
     const trunfoCheck = trunfo.length;
@@ -165,9 +177,6 @@ class App extends React.Component {
             data-testid="trunfo-filter"
           />
         </div>
-        <Filtrados
-          filtrados={ filtrado }
-        />
         <div className="form-preview">
           <Form
             cardName={ nomeCarta }
@@ -186,6 +195,7 @@ class App extends React.Component {
             carta={ carta }
           />
           <Card
+            id={ true }
             cardName={ nomeCarta }
             cardDescription={ descricaoCarta }
             cardAttr1={ attr1 }
@@ -207,7 +217,7 @@ class App extends React.Component {
                 <div
                   key={ index }
                 >
-                  <SavedCards
+                  <Card
                     cardName={ card.nomeCarta }
                     cardDescription={ card.descricaoCarta }
                     cardAttr1={ card.attr1 }
@@ -233,5 +243,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;

@@ -5,13 +5,13 @@ class Card extends React.Component {
   render() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo } = this.props;
+      cardImage, cardRare, cardTrunfo, id } = this.props;
     const cardAttr1S = String(cardAttr1);
     const cardAttr2S = String(cardAttr2);
     const cardAttr3S = String(cardAttr3);
     return (
       <div className="secao-carta">
-        <h2> Preview </h2>
+        { id ? <h2>Preview</h2> : ''}
         <p className="textos-card" data-testid="name-card">
           { cardName }
         </p>
@@ -56,6 +56,6 @@ Card.propTypes = {
   cardImage: PropType.string.isRequired,
   cardRare: PropType.string.isRequired,
   cardTrunfo: PropType.bool.isRequired,
-  // baralho: PropType.arrayOf(PropType.object).isRequired,
+  id: PropType.bool.isRequired,
 };
 export default Card;
