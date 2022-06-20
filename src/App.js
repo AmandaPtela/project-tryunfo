@@ -218,10 +218,10 @@ class App extends React.Component {
                     cardTrunfo={ card.cardTrunfo }
                   />
                   <button
-                    name={card.nomeCarta}
+                    name={ card.nomeCarta }
                     type="button"
                     data-testid="delete-button"
-                    onClick={ (card) => this.apagar(card) }
+                    onClick={ (cartaaa) => this.apagar(cartaaa) }
                   >
                     Excluir
                   </button>

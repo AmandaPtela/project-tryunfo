@@ -10,10 +10,10 @@ class Filtrados extends React.Component {
         <div>
           {
             filtrado.map((i) => (
-              <ul>
+              <ul key={ i.attr1 }>
                 <li key={ i.cardName }>
                   {
-                   Object.values(i)
+                    Object.values(i)
                   }
                 </li>
               </ul>
@@ -27,6 +27,4 @@ class Filtrados extends React.Component {
 Filtrados.propTypes = {
   filtrados: PropType.arrayOf(PropType.object).isRequired,
 };
-
 export default Filtrados;
-

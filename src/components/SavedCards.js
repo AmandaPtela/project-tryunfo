@@ -2,11 +2,10 @@ import React from 'react';
 import PropType from 'prop-types';
 // Feito com ajuda de Pesquisa no https://reactjs.org/docs/handling-events.html
 class SavedCards extends React.Component {
-  
   render() {
     const { cardName, cardDescription,
       cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, excluir } = this.props;
+      cardImage, cardRare, cardTrunfo } = this.props;
 
     return (
       <div className="secao-carta">
@@ -54,6 +53,5 @@ SavedCards.propTypes = {
   cardImage: PropType.string.isRequired,
   cardRare: PropType.string.isRequired,
   cardTrunfo: PropType.bool.isRequired,
-  excluir: PropType.func.isRequired,
 };
 export default SavedCards;
