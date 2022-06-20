@@ -6,7 +6,11 @@ import Filtrados from './components/Filtrados';
 import SavedCards from './components/SavedCards';
 
 class App extends React.Component {
-    state = {
+  constructor() {
+    super();
+    this.apagar = this.apagar.bind(this);
+
+    this.state = {
       nomeCarta: '',
       descricaoCarta: '',
       imagem: '',
@@ -18,29 +22,42 @@ class App extends React.Component {
       cardTrunfo: false,
       carta: '',
       baralho: [],
-      listaNomes: '',
       filtro: '',
       filtrado: [],
     };
+  }
 
   filtrar = (event) => {
     this.setState({ filtro: event.target.value });
   };
 
-  /* buscarRaridade = () => {
-    const { baralho, filtro, filtrado } = this.state;
-    const filtroRaridade = baralho.filter((item) => item.raridade === 'raro');
-    filtroRaridade ? this.setState({filtrado: filtroRaridade}) : '';
-  return filtrado;
+  buscarRaridade = () => {
+    const { baralho, filtro } = this.state;
+    const copiaBaralho = [...baralho];
+    if (filtro === 'todas') {
+      return copiaBaralho;
+    }
+    if (filtro === 'raro' || filtro === 'muito raro' || filtro === 'normal') {
+      const filtroRaridade = baralho.filter((item) => item.raridade === filtro);
+      this.setState({ filtrado: filtroRaridade });
+    }
+
+    if (filtro) {
+      return (baralho.filter((item) => item.cardName.startsWith(filtro)));
+    }
+  /*     if (PesquisaTrunfo) {
+      const filtroTrunfo = baralho.find((itm) => itm.cardTrunfo === true);
+      this.setState({ filtrado: filtroTrunfo });
     } */
+  }
 
   handlerInput = ({ target }) => {
     const { name } = target;
-    const value = (target.type === 'checkbox')
+    const valor = (target.type === 'checkbox')
       ? target.checked
       : target.value;
     this.setState({
-      [name]: value,
+      [name]: valor,
     }, this.onSaveButtonClick);
   }
 
@@ -68,17 +85,8 @@ class App extends React.Component {
     }
   }
 
-  apagar = (element) => {
-    const { baralho, cardTrunfo } = this.state;
-    baralho.splice(baralho.indexOf(element, 1));
-    this.setState({ baralho });
-    if (cardTrunfo) {
-      this.setState({ cardTrunfo: false });
-    }
-  }
-
   handleSaveButton = () => {
-    const { nomeCarta, descricaoCarta, imagem, listaNomes,
+    const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, baralho, cardTrunfo } = this.state;
     this.setState({
       carta:
@@ -105,26 +113,35 @@ class App extends React.Component {
             attr3,
             cardTrunfo,
           },
-        ],
-        listaNomes: [...listaNomes,
-          [nomeCarta],
-        ],
-      });
+        ] });
     });
+  }
+
+  apagar(event) {
+    const { baralho } = this.state;
+    const filtroCard = baralho.filter((item) => item.nomeCarta !== event.target.name);
+    this.setState({ baralho: filtroCard });
+
+    const trunfo = filtroCard.some((item) => item.cardTrunfo === true);
+    this.setState({ cardTrunfo: trunfo });
   }
 
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
-      cardTrunfo, carta, baralho, filtro, filtrado } = this.state;
+      cardTrunfo, carta, baralho, filtrado } = this.state;
 
-    const aray = carta.includes(filtro); // booleano
     const trunfo = baralho.filter((cartaa) => cartaa.cardTrunfo === true);
     const trunfoCheck = trunfo.length;
-
     return (
       <div className="geral">
         <div className="pesquisa">
+          <input
+            data-testid="name-filter"
+            onChange={ (event) => {
+              this.setState({ filtro: event.target.value });
+            } }
+          />
           <select
             onChange={ (event) => {
               this.setState({ filtro: event.target.value });
@@ -137,16 +154,20 @@ class App extends React.Component {
             <option>muito raro</option>
           </select>
           <button type="button" onClick={ this.buscarRaridade }>Pesquisar</button>
+          <input
+            className="input-trunfo"
+            name="PesquisaTrunfo"
+            type="checkbox"
+            checked={ cardTrunfo }
+            onChange={ (event) => {
+              this.setState({ filtro: event.target.value });
+            } }
+            data-testid="trunfo-filter"
+          />
         </div>
-        {
-          (aray)
-            ? (
-              <Filtrados
-                filtrados={ filtrado }
-              />
-            )
-            : ''
-        }
+        <Filtrados
+          filtrados={ filtrado }
+        />
         <div className="form-preview">
           <Form
             cardName={ nomeCarta }
@@ -161,7 +182,6 @@ class App extends React.Component {
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onInputChange={ this.handlerInput }
             onSaveButtonClick={ this.handleSaveButton }
-            baralho={ baralho }
             superTrunfo={ trunfoCheck }
             carta={ carta }
           />
@@ -174,7 +194,6 @@ class App extends React.Component {
             cardImage={ imagem }
             cardRare={ raridade }
             cardTrunfo={ cardTrunfo }
-            baralho={ baralho }
           />
         </div>
         <div className="botao-baralho">
@@ -184,18 +203,29 @@ class App extends React.Component {
         <div className="secao-baralho">
           <div className="area-cartas">
             {
-              baralho.map((card) => (<SavedCards
-                key={ card.imagem }
-                cardName={ card.nomeCarta }
-                cardDescription={ card.descricaoCarta }
-                cardAttr1={ card.attr1 }
-                cardAttr2={ card.attr2 }
-                cardAttr3={ card.attr3 }
-                cardImage={ card.imagem }
-                cardRare={ card.raridade }
-                cardTrunfo={ card.cardTrunfo }
-                excluir={ this.apagar }
-              />))
+              baralho.map((card, index) => (
+                <div
+                  key={ index }
+                >
+                  <SavedCards
+                    cardName={ card.nomeCarta }
+                    cardDescription={ card.descricaoCarta }
+                    cardAttr1={ card.attr1 }
+                    cardAttr2={ card.attr2 }
+                    cardAttr3={ card.attr3 }
+                    cardImage={ card.imagem }
+                    cardRare={ card.raridade }
+                    cardTrunfo={ card.cardTrunfo }
+                  />
+                  <button
+                    name={card.nomeCarta}
+                    type="button"
+                    data-testid="delete-button"
+                    onClick={ (card) => this.apagar(card) }
+                  >
+                    Excluir
+                  </button>
+                </div>))
             }
           </div>
         </div>

@@ -10,11 +10,14 @@ class Filtrados extends React.Component {
         <div>
           {
             filtrado.map((i) => (
-              <li key={ i.nomeCarta }>
-                {
-                  Object.values(i)
-                }
-              </li>))
+              <ul>
+                <li key={ i.cardName }>
+                  {
+                   Object.values(i)
+                  }
+                </li>
+              </ul>
+            ))
           }
         </div>
       </div>
@@ -27,10 +30,3 @@ Filtrados.propTypes = {
 
 export default Filtrados;
 
-/*
-apagar = (event) => {
-  const { baralho } = this.state;
-  this.setState({
-    baralho: baralho.splice(baralho.indexOf(event.target, 1)),
-  });
-} */

@@ -13,7 +13,6 @@ class Card extends React.Component {
       <div className="secao-carta">
         <h2> Preview </h2>
         <p className="textos-card" data-testid="name-card">
-          Nome:
           { cardName }
         </p>
         { cardTrunfo === true && <h3 data-testid="trunfo-card"> Super Trunfo </h3> }
@@ -27,25 +26,20 @@ class Card extends React.Component {
           />
         </div>
         <p className="textos-card-bottom" data-testid="description-card">
-          Descrição
           { cardDescription }
         </p>
         <div className="secao-attr">
           <p className="textos-card-bottom" data-testid="attr1-card">
-            Atributo 1:
             { cardAttr1S }
           </p>
           <p className="textos-card-bottom" data-testid="attr2-card">
-            Atributo 2:
             { cardAttr2S }
           </p>
           <p className="textos-card-bottom" data-testid="attr3-card">
-            Atributo 3:
             { cardAttr3S }
           </p>
         </div>
         <p className="textos-card-bottom" data-testid="rare-card">
-          Raridade:
           { cardRare }
         </p>
       </div>
