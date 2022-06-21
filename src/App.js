@@ -133,7 +133,7 @@ class App extends React.Component {
   apagar(event) {
     const { baralho } = this.state;
     const filtroCard = baralho.filter((item) => item.nomeCarta !== event.target.name);
-    this.setState({ baralho: filtroCard });
+    this.setState({ copiaBaralho: filtroCard });
     const trunfo = filtroCard.some((item) => item.cardTrunfo === true);
     this.setState({ cardTrunfo: trunfo });
   }
@@ -143,8 +143,8 @@ class App extends React.Component {
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
       cardTrunfo, carta, baralho, id, copiaBaralho, filtro } = this.state;
 
-    const trunfo = baralho.filter((cartaa) => cartaa.cardTrunfo === true);
-    const trunfoCheck = trunfo.length > 0;
+    const trunfo = copiaBaralho.filter((cartaa) => cartaa.cardTrunfo === true);
+    const trunfoCheck = trunfo.length;
 
     return (
       <div className="geral">
