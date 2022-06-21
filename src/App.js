@@ -47,7 +47,7 @@ class App extends React.Component {
       this.setState({ copiaBaralho: baralho });
     }
     if (filtro) {
-      const trunfoss = baralho.filter((item) => item.cardTrunfo === true);
+      const trunfoss = baralho.find((item) => item.cardTrunfo === true);
       this.setState({ copiaBaralho: [trunfoss] });
     }
   }
