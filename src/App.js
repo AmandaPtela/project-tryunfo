@@ -15,12 +15,13 @@ class App extends React.Component {
       attr2: '',
       attr3: '',
       isSaveButtonDisabled: true,
-      raridade: '',
+      raridade: 'normal',
       cardTrunfo: false,
       carta: '',
       baralho: [],
       filtro: '',
       copiaBaralho: [],
+      id: true,
     };
   }
 
@@ -34,22 +35,21 @@ class App extends React.Component {
       const filtroRaro = baralho.filter((item) => item.raridade === filtro);
       this.setState({ copiaBaralho: filtroRaro });
     }
-
     if (filtro === 'muito raro') {
       const filtroMtRaro = baralho.filter((item) => item.raridade === filtro);
       this.setState({ copiaBaralho: filtroMtRaro });
     }
-
     if (filtro === 'normal') {
       const filtroNormal = baralho.filter((item) => item.raridade === filtro);
       this.setState({ copiaBaralho: filtroNormal });
     }
-
     if (filtro === 'todas') {
-
       this.setState({ copiaBaralho: baralho });
     }
-
+    if (filtro) {
+      const trunfoss = baralho.find((item) => item.cardTrunfo === true);
+      this.setState({ copiaBaralho: [trunfoss] });
+    }
   }
 
   handlerInput = ({ target }) => {
@@ -141,38 +141,40 @@ class App extends React.Component {
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
-      cardTrunfo, carta, baralho } = this.state;
+      cardTrunfo, carta, baralho, id, copiaBaralho, filtro } = this.state;
 
     const trunfo = baralho.filter((cartaa) => cartaa.cardTrunfo === true);
-    const trunfoCheck = trunfo.length;
+    const trunfoCheck = trunfo.length > 0;
+
     return (
       <div className="geral">
         <div className="pesquisa">
           <input
             data-testid="name-filter"
+            disabled={ filtro === 'on' }
             onChange={ (event) => {
               this.setState({ filtro: event.target.value });
             } }
           />
           <select
             onChange={ (event) => {
-              this.setState({ filtro: event.target.value });
+              this.setState({ filtro: event.target.value }, this.buscarRaridade);
             } }
             data-testid="rare-filter"
+            disabled={ filtro === 'on' }
           >
             <option>todas</option>
             <option>normal</option>
             <option>raro</option>
             <option>muito raro</option>
           </select>
-          <button type="button" onClick={ this.buscarRaridade }>Pesquisar</button>
           <input
             className="input-trunfo"
             name="PesquisaTrunfo"
             type="checkbox"
             checked={ cardTrunfo }
             onChange={ (event) => {
-              this.setState({ filtro: event.target.value });
+              this.setState({ filtro: event.target.value }, this.buscarRaridade);
             } }
             data-testid="trunfo-filter"
           />
@@ -195,7 +197,7 @@ class App extends React.Component {
             carta={ carta }
           />
           <Card
-            id={ true }
+            id={ id }
             cardName={ nomeCarta }
             cardDescription={ descricaoCarta }
             cardAttr1={ attr1 }
@@ -213,7 +215,7 @@ class App extends React.Component {
         <div className="secao-baralho">
           <div className="area-cartas">
             {
-              baralho.map((card, index) => (
+              copiaBaralho.map((card, index) => (
                 <div
                   key={ index }
                 >

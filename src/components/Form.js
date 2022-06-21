@@ -92,7 +92,7 @@ class Form extends React.Component {
               <option>muito raro</option>
             </select>
           </div>
-          {superTrunfo === 1 ? (<span>Você já tem um Super Trunfo em seu baralho</span>
+          {superTrunfo ? (<span>Você já tem um Super Trunfo em seu baralho</span>
           ) : (
             <div className="secao-checkbox">
               <input
