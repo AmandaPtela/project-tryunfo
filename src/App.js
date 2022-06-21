@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Form from './components/Form';
 import Card from './components/Card';
+
 class App extends React.Component {
   constructor() {
     super();
@@ -27,28 +28,30 @@ class App extends React.Component {
   filtrar = (event) => {
     this.setState({ filtro: event.target.value });
   };
+
   buscarRaridade = () => {
     const { baralho, filtro } = this.state;
-    if (filtro === 'raro') {
-      const filtroRaro = baralho.filter((item) => item.raridade === filtro);
-      this.setState({ copiaBaralho: filtroRaro });
+    const filtroRaroo = 'raro';
+    if (filtro === filtroRaroo) {
+      const filtroRaro = baralho.filter((item) => item.raridade === filtroRaroo);
+      return this.setState({ copiaBaralho: filtroRaro });
     }
-
-    if (filtro === 'muito raro') {
-      const filtroMtRaro = baralho.filter((item) => item.raridade === filtro);
-      this.setState({ copiaBaralho: filtroMtRaro });
+    const filtroMtRaroo = 'muito raro';
+    if (filtro === filtroMtRaroo) {
+      const filtroMtRaro = baralho.filter((item) => item.raridade === filtroMtRaroo);
+      return this.setState({ copiaBaralho: filtroMtRaro });
     }
-
-    if (filtro === 'normal') {
-      const filtroNormal = baralho.filter((item) => item.raridade === filtro);
-      this.setState({ copiaBaralho: filtroNormal });
+    const filtroNormall = 'normal';
+    if (filtro === filtroNormall) {
+      const filtroNormal = baralho.filter((item) => item.raridade === filtroNormall);
+      return this.setState({ copiaBaralho: filtroNormal });
     }
     if (filtro === 'todas') {
-      this.setState({ copiaBaralho: baralho });
+      return this.setState({ copiaBaralho: baralho });
     }
     if (filtro) {
       const trunfoss = baralho.find((item) => item.cardTrunfo === true);
-      this.setState({ copiaBaralho: [trunfoss] });
+      return this.setState({ copiaBaralho: [trunfoss] });
     }
   }
 
@@ -61,6 +64,7 @@ class App extends React.Component {
       [name]: valor,
     }, this.onSaveButtonClick);
   }
+
   onSaveButtonClick = () => {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3 } = this.state;
@@ -83,6 +87,7 @@ class App extends React.Component {
       this.setState({ isSaveButtonDisabled: false });
     }
   }
+
   handleSaveButton = () => {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, baralho, cardTrunfo } = this.state;
@@ -129,12 +134,12 @@ class App extends React.Component {
 
   apagar(event) {
     const { copiaBaralho } = this.state;
-    const filtroCard = copiaBaralho.filter((item) => item.nomeCarta !== event.target.name);
+    const filtroCard = copiaBaralho.filter((i) => i.nomeCarta !== event.target.name);
     this.setState({ copiaBaralho: filtroCard });
     const trunfo = filtroCard.find((item) => item.cardTrunfo === true);
     this.setState({ cardTrunfo: trunfo });
   }
-  
+
   render() {
     const { nomeCarta, descricaoCarta, imagem,
       attr1, attr2, attr3, raridade, isSaveButtonDisabled,
