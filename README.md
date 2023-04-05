@@ -1,10 +1,24 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+  <strong> Tryunfo </strong><br />
+
+O projeto consiste em desenvolver um jogo no estilo _Super Trunfo!_, onde o usuário consegue: 
+  * Criar um baralho, com o tema livre;
+
+  * Adicionar e remover uma carta do baralho;
+
+  * Visualizar todas as cartas que foram adicionadas ao baralho;
+  
+  * Filtrar as cartas do baralho;
+
+Foi desenvolvido utilizando _React_.
+<br>
+
+  <summary><strong>Rodando o projeto‼️ </strong></summary><br />
+  
+  1. Clone o repositório
+   - `git clone git@github.com:AmandaPtela/tryunfo.git`
+    
+  2. Instale as dependências e inicialize o projeto
+  - Instale as dependências:
+    - `npm install`
+  - Inicialize o projeto:
+    - `npm start` (uma nova página deve abrir no seu navegador com o projeto)
