@@ -15,7 +15,7 @@ Foi desenvolvido utilizando _React_.
   <summary><strong>Rodando o projeto‼️ </strong></summary><br />
   
   1. Clone o repositório
-   - `git clone git@github.com:AmandaPtela/tryunfo.git`
+   - `git clone git@github.com:AmandaPtela/project-tryunfo.git`
     
   2. Instale as dependências e inicialize o projeto
   - Instale as dependências:
